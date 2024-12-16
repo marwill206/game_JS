@@ -1,24 +1,16 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import * as ex from "excalibur";
+import { SCALE, VIEWPORT_HEIGHT, VIEWPORT_WIDTH } from "../constants.js";
+import { player } from "./actors/players/player";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const game = new ex.Engine({
+  width: VIEWPORT_WIDTH * SCALE,
+  height: VIEWPORT_HEIGHT * SCALE,
+  fixedUpdateFps: 60,
+  antialiasing: false,
 
-setupCounter(document.querySelector('#counter'))
+});
+
+const player = new player(200,200, "BLUE");
+game.add(player);
+
+game.start();
